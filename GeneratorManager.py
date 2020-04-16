@@ -8,10 +8,14 @@ class SDG800():
         self.generator = None
 
     def connect(self, name = ""):
+        success = False
         if name == "":
             name = "USB0::0xF4ED::0xEE3A::NDG08CBC3R0018::INSTR"
-        self.generator = self.rm.open_resource(name)
-        success = False
+        try:
+            self.generator = self.rm.open_resource(name)
+        except:
+            success = False
+        
         if self.requestID()[0:4] == "*IDN":
             success = True
 
